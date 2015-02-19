@@ -1,0 +1,36 @@
+package com.project.minutesofmeeting;
+
+import android.app.ListActivity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.widget.ListView;
+
+import com.porject.minutesofmeeting.R;
+
+public class Contacts extends ListActivity {
+
+	@Override
+	public int getSelectedItemPosition() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemPosition();
+	}
+
+	@Override
+	public long getSelectedItemId() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemId();
+	}
+	
+	ListView lv;
+	Cursor cursor1;
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contact);
+
+		cursor1=getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+		
+	}
+
+}

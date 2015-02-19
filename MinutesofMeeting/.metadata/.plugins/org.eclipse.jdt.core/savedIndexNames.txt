@@ -1,0 +1,5 @@
+INDEX VERSION 1.127+D:\MinutesofMeeting\.metadata\.plugins\org.eclipse.jdt.core
+3873827416.index
+3886069485.index
+1284074322.index
+3425618060.index

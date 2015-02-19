@@ -1,0 +1,45 @@
+package com.project.minutesofmeeting;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import com.porject.minutesofmeeting.R;
+
+public class Venue extends Activity {
+
+	TextView venue1;
+	TextView venue2;
+	TextView venue3;
+	TextView venue4;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.venue);
+		venue1 = (TextView) findViewById(R.id.venue1);
+		venue2 = (TextView) findViewById(R.id.venue2);
+		venue3 = (TextView) findViewById(R.id.venue3);
+		venue4 = (TextView) findViewById(R.id.venue4);
+		ArrayList<String> abc = new ArrayList<String>();
+
+		abc.add("Conference Room 1");
+		abc.add("Conference Room 2");
+		abc.add("Conference Room 3");
+		abc.add("Conference Room 4");
+
+		int a = abc.size();
+Log.d("1", abc.get(1).toString());
+	//	for (int i = 0; i < a; i++) {
+			venue1.setText(abc.get(0).toString());
+			venue2.setText(abc.get(1).toString());
+			venue3.setText(abc.get(2).toString());
+			venue4.setText(abc.get(3).toString());
+	//	}
+
+	}
+
+}

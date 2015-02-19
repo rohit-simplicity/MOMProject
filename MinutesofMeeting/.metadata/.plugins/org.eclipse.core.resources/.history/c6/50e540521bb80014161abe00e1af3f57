@@ -1,0 +1,51 @@
+package com.mom;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class CustomList extends ArrayAdapter<String>{
+	String[] names={"ajit","nistish","ajay","aajit","anistish","aajay"};
+	String[] date={"aaj","kal","parso","aaaj","akal","aparso"};
+	String[] times={"1 min","2min","3min","4 min","5min","6min"};
+	
+private final Activity context;
+private final String[] name;
+private final String[] dates;
+private final String[] time;
+
+public CustomList(Activity context,
+String[] name, String[] dates,String[] time) {
+super(context, R.layout.list_mom,name);
+this.context = context;
+this.name = name;
+this.dates = dates;
+this.time=time;
+
+}
+
+@Override
+public View getView(int position, View view, ViewGroup parent) {
+LayoutInflater inflater = context.getLayoutInflater();
+View rowView= inflater.inflate(R.layout.list_mom, null, true);
+	TextView txtProjectTitle = (TextView) rowView.findViewById(R.id.textView2);
+	TextView txtProjectDate = (TextView) rowView.findViewById(R.id.textView3);
+	TextView txtProjectTime = (TextView) rowView.findViewById(R.id.textView4);
+	
+	ImageButton imageb=(ImageButton)rowView.findViewById(R.id.imageButton1);
+
+	txtProjectTitle.setText(names[position]);
+    txtProjectDate.setText("\n"+date[position]);
+    txtProjectTime.setText(times[position]);
+return rowView;
+}
+
+}

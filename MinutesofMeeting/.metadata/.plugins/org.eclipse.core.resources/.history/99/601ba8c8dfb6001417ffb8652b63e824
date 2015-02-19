@@ -1,0 +1,224 @@
+package com.project.minutesofmeeting;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.R.integer;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Contacts;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Display extends Activity implements OnItemClickListener {
+
+	List<String> name1 = new ArrayList<String>();
+	List<String> phno1 = new ArrayList<String>();
+	List<String> email1 = new ArrayList<String>();
+	MyAdapter ma;
+	Integer abc = 0;
+	String xyz;
+	Button select;
+	private static final String SORT_ORDER = Phone.DISPLAY_NAME + " ASC ";
+
+	// private static final String[] PROJECTION = { Email._ID, Email.ADDRESS,
+	// Email.TYPE, Email.LABEL, Phone.DISPLAY_NAME, Phone.NUMBER };
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.display);
+
+		getAllContacts(this.getContentResolver());
+		// getAllEmails(this.getContentResolver());
+		ListView lv = (ListView) findViewById(R.id.lv);
+		ma = new MyAdapter();
+		lv.setAdapter(ma);
+		lv.setOnItemClickListener(this);
+		lv.setItemsCanFocus(false);
+		lv.setTextFilterEnabled(true);
+		// adding
+		select = (Button) findViewById(R.id.button1);
+		select.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				StringBuilder checkedcontacts = new StringBuilder();
+				System.out.println(".............." + ma.mCheckStates.size());
+				for (int i = 0; i < name1.size(); i++)
+
+				{
+					if (ma.mCheckStates.get(i) == true) {
+						abc = abc + 1;
+
+						checkedcontacts.append(name1.get(i).toString());
+						checkedcontacts.append("\n");
+
+					} else {
+						System.out.println("Not Checked......"
+								+ name1.get(i).toString());
+					}
+
+				}
+
+				Toast.makeText(Display.this, checkedcontacts, 1000).show();
+				Toast.makeText(Display.this, abc.toString(), 1000).show();
+			/*	Intent i = new Intent(Display.this, CreateMeeting.class);
+			    i.putExtra(CreateMeeting.passing3, abc.toString());
+				CreateMeeting.flag2=1;
+				startActivity(i);
+				finish();*/
+				temp abc=new temp();
+				abc.date=abc.toString();
+			}
+		});
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		ma.toggle(arg2);
+	}
+
+	public void getAllContacts(ContentResolver cr) {
+
+		Cursor phones = cr.query(
+				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,
+				null, SORT_ORDER);
+
+		while (phones.moveToNext()) {
+			String name = phones
+					.getString(phones
+							.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+			String phoneNumber = phones
+					.getString(phones
+							.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+			// String email
+			// =emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
+			System.out.println(".................." + phoneNumber);
+			name1.add(name);
+			phno1.add(phoneNumber);
+			// email1.add(email);
+		}
+
+		phones.close();
+
+		Cursor emails = cr.query(
+				ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, null,
+				null, SORT_ORDER);
+		while (emails.moveToNext()) {
+
+			String email = emails
+					.getString(emails
+							.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
+
+			System.out.println(".................." + email);
+
+			email1.add(email);
+
+		}
+
+		emails.close();
+		// yaha par tha
+	}
+
+	class MyAdapter extends BaseAdapter implements
+			CompoundButton.OnCheckedChangeListener {
+		private SparseBooleanArray mCheckStates;
+		LayoutInflater mInflater;
+		TextView tv1, tv, em1;
+		CheckBox cb;
+
+		MyAdapter() {
+			mCheckStates = new SparseBooleanArray(name1.size());
+			mInflater = (LayoutInflater) Display.this
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return name1.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+
+			return 0;
+		}
+
+		@Override
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
+			// TODO Auto-generated method stub
+			View vi = convertView;
+			if (convertView == null)
+				vi = mInflater.inflate(R.layout.row, null);
+			TextView tv = (TextView) vi.findViewById(R.id.textView1);
+			tv1 = (TextView) vi.findViewById(R.id.textView2);
+			cb = (CheckBox) vi.findViewById(R.id.checkBox1);
+			em1 = (TextView) vi.findViewById(R.id.textView3);
+			// getAllContacts(this.getContentResolver());
+			tv.setText("Name :" + name1.get(position));
+
+			tv1.setText("Phone No :" + phno1.get(position));
+			em1.setText("Email :" + email1.get(position));
+			cb.setTag(position);
+			cb.setChecked(mCheckStates.get(position, false));
+			cb.setOnCheckedChangeListener(this);
+
+			return vi;
+		}
+
+		public boolean isChecked(int position) {
+			return mCheckStates.get(position, false);
+		}
+
+		public void setChecked(int position, boolean isChecked) {
+			mCheckStates.put(position, isChecked);
+			System.out.println("hello...........");
+			notifyDataSetChanged();
+		}
+
+		public void toggle(int position) {
+			setChecked(position, !isChecked(position));
+		}
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			// TODO Auto-generated method stub
+
+			mCheckStates.put((Integer) buttonView.getTag(), isChecked);
+		}
+	}
+}

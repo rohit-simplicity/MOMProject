@@ -1,0 +1,71 @@
+package com.example.contact;
+
+
+import android.app.ListActivity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class Contact extends ListActivity {
+
+	
+	
+	@Override
+	public int getSelectedItemPosition() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemPosition();
+	}
+
+	@Override
+	public long getSelectedItemId() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemId();
+	}
+
+	ListView lv;
+	Cursor cursor1;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contact);
+		
+		cursor1=getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+		startManagingCursor(cursor1);
+		String[] from={ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,ContactsContract.CommonDataKinds.Phone.NUMBER,ContactsContract.CommonDataKinds.Phone._ID};
+		int[] to={android.R.id.text1,android.R.id.text2};
+		
+		SimpleCursorAdapter listadapter=new SimpleCursorAdapter(this, android.R.layout.simple_list_item_checked, cursor1, from, to);
+		//listadapter.set
+	//	Toast.makeText(getApplicationContext(), "Count list"+abc, Toast.LENGTH_LONG).show();
+		setListAdapter(listadapter);
+		lv=getListView();
+		lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}

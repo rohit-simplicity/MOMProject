@@ -1,0 +1,23 @@
+package com.sc.skeletonapp.activities;
+
+import android.database.Cursor;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import com.sc.skeletonapp.R;
+import com.sc.skeletonapp.db.DatabaseService;
+
+public class LoginActivity extends BaseActivity{
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.login);
+		
+		
+	      
+	}
+
+
+}

@@ -1,0 +1,8 @@
+package com.project.minutesofmeeting;
+
+import android.R.string;
+
+public class temp {
+	public static String date= "date";
+
+}

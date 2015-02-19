@@ -1,0 +1,105 @@
+package com.project.minutesofmeeting;
+
+import java.util.Calendar;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+public class CreateMeeting extends Activity {
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.create);
+		ImageButton contact;
+		ImageButton venue;
+		Integer hour;
+		Integer minute;
+		TextView currenttime=(TextView)findViewById(R.id.currenttime);
+		
+		
+		//get current time
+		final Calendar c = Calendar.getInstance();
+		hour = c.get(Calendar.HOUR_OF_DAY);
+		minute = c.get(Calendar.MINUTE);
+		
+		
+		//set current tiem to textview
+		currenttime.setText(new StringBuilder().append(pad(hour)).append(":")
+				.append(pad(minute)));
+		
+		
+		
+
+		TextView setdate = (TextView) findViewById(R.id.setdate);
+		setdate.setText(temp.date);
+
+		TextView count = (TextView) findViewById(R.id.count);
+
+		count.setText(temp.count);
+
+		venue = (ImageButton) findViewById(R.id.selectvenue);
+
+		venue.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(CreateMeeting.this, Venue.class);
+				startActivity(i);
+
+				// finish();
+			}
+		});
+
+		contact = (ImageButton) findViewById(R.id.selectcontact);
+
+		contact.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(CreateMeeting.this, Display.class);
+				startActivity(i);
+				finish();
+			}
+		});
+
+		ImageButton template = (ImageButton) findViewById(R.id.selecttemplate);
+		template.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(CreateMeeting.this, Template.class);
+				startActivity(i);
+			}
+		});
+
+		ImageButton date = (ImageButton) findViewById(R.id.selectdate);
+
+		date.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(CreateMeeting.this, Date.class);
+
+				startActivity(i);
+				finish();
+			}
+		});
+
+	}
+	
+	private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
+	
+	
+}

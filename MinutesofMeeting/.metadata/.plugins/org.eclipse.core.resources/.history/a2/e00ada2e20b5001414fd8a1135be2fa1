@@ -1,0 +1,18 @@
+package com.sc.skeletonapp.db;
+
+
+public final class QueryManager {
+
+	//public static final String USER_DETAILS = "Create Table IF NOT EXISTS Doctor_Details(_id INTEGER PRIMARY KEY AUTOINCREMENT,user_id text not null, user_fname text not null,user_mname text ,user_lname text not null)";
+	public static final String REMINDER_TABLE = "Create Table IF NOT EXISTS Reminder(_id INTEGER PRIMARY KEY AUTOINCREMENT,user_id text not null, date text not null,time text not null,name text not null,url text)";
+	public static final String INSURANCE_REMIINDER_TABLE = "Create Table IF NOT EXISTS InsuranceReminder(_id INTEGER PRIMARY KEY AUTOINCREMENT,user_id text not null, date text not null,time text not null,name text not null,url text)";
+	
+	public static final String COUNTRY = "Create Table IF NOT EXISTS Country(_id INTEGER PRIMARY KEY AUTOINCREMENT,name text NOT NULL UNIQUE, version INTEGER)";
+	public static final String STATE = "Create Table IF NOT EXISTS State(_id INTEGER PRIMARY KEY AUTOINCREMENT,name text NOT NULL UNIQUE,country text NOT NULL, version INTEGER)";
+	public static final String CITY = "Create Table IF NOT EXISTS City(_id INTEGER PRIMARY KEY AUTOINCREMENT,name text NOT NULL,state text NOT NULL,country text NOT NULL, version INTEGER)";
+	
+	public static final String ATTENDEES="CREATE Table IF NOT EXISTS attendees (attendeeid INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , attendeename TEXT, attendeeemal TEXT, attendeecontact TEXT)";
+	public static final String MEETINGS="CREATE Table IF NOT EXISTS meetings (meetingid INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , meetingtopic TEXT NOT NULL , meetingdate TEXT NOT NULL , agenda TEXT, attendees TEXT, projectname TEXT, venue TEXT, duration TEXT, templateid INTEGER, setting INTEGER)";
+	public static final String PROJECT="CREATE TABLE projects (projectid INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , projectname TEXT)";
+	public static final String TEMPLATES="CREATE TABLE templates (templateid INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , templatename TEXT, templateimage TEXT)";
+}

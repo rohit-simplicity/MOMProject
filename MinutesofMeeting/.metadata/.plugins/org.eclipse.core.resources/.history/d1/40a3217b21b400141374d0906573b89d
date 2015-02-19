@@ -1,0 +1,28 @@
+package com.project.minutesofmeeting;
+
+import com.porject.minutesofmeeting.R;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+
+public class Contacts extends ListActivity {
+
+	@Override
+	public int getSelectedItemPosition() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemPosition();
+	}
+
+	@Override
+	public long getSelectedItemId() {
+		// TODO Auto-generated method stub
+		return super.getSelectedItemId();
+	}
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.create);
+
+	}
+
+}

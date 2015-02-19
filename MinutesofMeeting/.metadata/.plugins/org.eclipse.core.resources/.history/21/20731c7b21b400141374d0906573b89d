@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+02
+    xmlns:tools="http://schemas.android.com/tools"
+03
+    android:layout_width="match_parent"
+04
+    android:layout_height="match_parent"
+05
+    tools:context=".MainActivity" >
+06
+ 
+07
+    <TextView
+08
+        android:id="@+id/textView"
+09
+        android:layout_width="wrap_content"
+10
+        android:layout_height="wrap_content"
+11
+        android:layout_alignParentLeft="true"
+12
+        android:layout_alignParentRight="true"
+13
+        android:layout_alignParentTop="true"
+14
+        android:layout_margin="10dp"
+15
+        android:textSize="20dp"
+16
+        android:gravity="center"
+17
+        android:text="Contacts Information" />
+18
+ 
+19
+    <TextView
+20
+        android:id="@+id/textView1"
+21
+        android:layout_width="wrap_content"
+22
+        android:layout_height="wrap_content"
+23
+        android:layout_alignLeft="@+id/textView"
+24
+        android:layout_alignRight="@+id/textView"
+25
+        android:layout_below="@+id/textView"
+26
+        android:gravity="center"
+27
+        android:text="TextView" />
+28
+ 
+29
+    <ProgressBar
+30
+        android:id="@+id/progressBar1"
+31
+        style="?android:attr/progressBarStyleHorizontal"
+32
+        android:layout_width="wrap_content"
+33
+        android:layout_height="wrap_content"
+34
+        android:layout_above="@+id/textView1"
+35
+        android:layout_alignParentLeft="true"
+36
+        android:layout_alignParentRight="true" />
+37
+ 
+38
+</RelativeLayout>

@@ -1,0 +1,4 @@
+#Sat Feb 14 14:02:14 IST 2015
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+expression=subclipse
